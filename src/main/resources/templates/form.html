@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Pets - Form</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family:Arial, Helvetica, sans-serif;
+        }
+
+        h2 {
+            padding: 20px;
+            text-align: center;
+            font-size: 35px;
+        }
+
+        .petsFormContainer {
+            width: 90%;
+            margin: 0 auto;
+            height: 90vh;
+        }
+
+        .petsForm {
+            box-shadow: 0 0 4px #000;
+            width: 100%;
+            padding: 10px 15px;
+        }
+
+        .petsForm input {
+            margin: 10px 0;
+        }
+
+        .petsForm input[type="text"],
+        .petsForm select {
+            padding: 10px 15px;
+            width: 80%;
+            border-radius: 7px;
+            border: none;
+            box-shadow: 0 0 3px #000;
+        }
+
+        .petsForm .gender {
+            margin-right: 20px;
+        }
+
+        button {
+            background: none;
+            border: none;
+            padding: 10px 25px;
+            margin: 20px 0 0 0;
+            color: #fff;
+            background: #0069be;
+            cursor: pointer;
+            transition: 350ms ease-in-out;
+        }
+
+        button:hover {
+            background: #002f55;
+            transition: 350ms ease-in-out;
+        }
+    </style>
+</head>
+<body>
+<h2>Add / Edit Pet</h2>
+
+<div class="petsFormContainer">
+    <form class="petsForm" th:action="@{/pets}" th:object="${pet}" method="post">
+        <div>
+            <label>Name:</label>
+            <input type="text" th:field="*{name}" required="required">
+            <span th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></span>
+        </div>
+
+        <div>
+            <label>Kind:</label>&nbsp;&nbsp;
+            <select th:field="*{kind}">
+                <option value="CAT">Cat</option>
+                <option value="DOG">Dog</option>
+                <option value="RABBIT">Rabbit</option>
+            </select>
+        </div>
+
+        <div>
+            <label class="gender">Sex:</label>
+            <input type="radio" th:field="*{sex}" value="FEMALE"> Female
+            <input type="radio" th:field="*{sex}" value="MALE"> Male
+        </div>
+
+        <div>
+            <label>Vaccination:</label>
+            <input type="checkbox" th:field="*{vaccinated}">
+        </div>
+
+        <button type="submit">Save</button>
+    </form>
+</div>
+
+</body>
+</html>

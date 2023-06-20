@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Pets - List</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family:Arial, Helvetica, sans-serif;
+        }
+
+        h2 {
+            padding: 20px;
+            text-align: center;
+            font-size: 45px;
+        }
+
+        .petsTblContainer {
+            width: 90%;
+            margin: 0 auto;
+            height: 90vh;
+        }
+
+        .petsTable {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .petsTable thead tr th, .petsTable tbody tr td {
+            border: 1px solid #000;
+            padding: 10px;
+        }
+    </style>
+</head>
+<body>
+<h2>List of Pets</h2>
+
+<div class="petsTblContainer">
+    <table class="petsTable">
+        <thead>
+        <tr>
+            <th>Name</th>
+            <th>Kind</th>
+            <th>Sex</th>
+            <th>Vaccination</th>
+            <th>Actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="pet : ${pets}">
+            <td th:text="${pet.name}"></td>
+            <td th:text="${pet.kind}"></td>
+            <td th:text="${pet.sex}"></td>
+            <td th:text="${pet.vaccinated} ? 'Vaccinated' : 'Not Vaccinated'"></td>
+            <td>
+                <a th:href="@{/pets/{id}/edit(id=${pet.id})}">Edit</a>
+                <a th:href="@{/pets/{id}/delete(id=${pet.id})}">Delete</a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+<a href="new">Add New Pet</a>
+
+</body>
+</html>
